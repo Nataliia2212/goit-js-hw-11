@@ -4,6 +4,8 @@ import "izitoast/dist/css/iziToast.min.css";
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 
+import search from "./search";
+
 const formRef = document.querySelector('.form');
 const galleryRef = document.querySelector('.gallery');
 const loaderRef = document.querySelector('.loader');
@@ -16,7 +18,6 @@ let gallery = new SimpleLightbox('.gallery-item a',
 formRef.addEventListener('submit', onFormSubmit);
 
 function onFormSubmit(event) {
-
     event.preventDefault();
     galleryRef.innerHTML = '';
     loaderRef.classList.remove('is-hidden');
@@ -44,27 +45,6 @@ function onFormSubmit(event) {
         });
     
     formRef.reset();
-}
-
-
-function search(qvery) {
-    const BASE_URL = 'https://pixabay.com';
-    const END_POINT = '/api/';
-    const searchParams = new URLSearchParams({
-        key: '35439381-dc6c31f5e4218074de9a0ab23',
-        q : qvery,
-        image_type:  'photo',
-        orientation : 'horizontal',
-        safesearch :  true,
-    });
-    const url = `${BASE_URL}${END_POINT}?${searchParams}`
-
-    return fetch(url).then(response => {
-        if (!response.ok) {
-            throw new Error(response.status);
-        }
-        return response.json();
-    })
 }
 
 function markup(arr) {
